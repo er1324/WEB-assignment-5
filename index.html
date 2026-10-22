@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Introduction to JavaScript</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="navbar-nav">
+            <li><a href="index.html" class="nav-link active">Intro</a></li>
+            <li><a href="dom.html" class="nav-link">DOM</a></li>
+            <li><a href="events.html" class="nav-link">Events</a></li>
+            <li><a href="todo.html" class="nav-link">To-Do App</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-container">
+        <div style="margin-bottom: 24px;">
+            <h2>Task 0: First Script</h2>
+            <p>Check the browser console to see student metadata output and an alert message.</p>
+        </div>
+
+        <div>
+            <h2>Task 1: Variables & Operators</h2>
+            <p>Variables of various types, arithmetic operations, and string concatenations are processed and displayed in the console.</p>
+        </div>
+    </div>
+
+    <script>
+        console.log("Student: Yerzhan Kurmanbayev, Group: SE-2528");
+        alert("Hello, JavaScript World!");
+
+        let studentName = "Student";
+        let studentAge = 19;
+        let isEnrolled = true;
+
+        console.log(typeof studentName);
+        console.log(typeof studentAge);
+        console.log(typeof isEnrolled);
+
+        let x = 15;
+        let y = 5;
+        console.log(x + y);
+        console.log(x * y);
+
+        let greeting = "Hello, " + studentName + "! Age: " + studentAge;
+        console.log(greeting);
+    </script>
+</body>
+</html>
