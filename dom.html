@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM Manipulation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="navbar-nav">
+            <li><a href="index.html" class="nav-link">Intro</a></li>
+            <li><a href="dom.html" class="nav-link active">DOM</a></li>
+            <li><a href="events.html" class="nav-link">Events</a></li>
+            <li><a href="todo.html" class="nav-link">To-Do App</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-container">
+        <div style="margin-bottom: 30px;">
+            <h2>Task 2: Changing Content</h2>
+            <p id="textParagraph" style="margin-bottom: 12px;">This is original text that will change upon clicking the button.</p>
+            <button class="btn-primary" id="changeTextBtn">Change Text</button>
+        </div>
+
+        <div style="margin-bottom: 30px;">
+            <h2>Task 3: Changing Styles</h2>
+            <div id="styledBox" style="padding: 20px; background-color: #2c2c2a; margin-bottom: 12px; border-radius: 4px;">
+                Container for style manipulation.
+            </div>
+            <button class="btn-primary" id="changeBgBtn">Change Background</button>
+            <button class="btn-secondary" id="changeFontBtn">Change Font Size</button>
+        </div>
+
+        <div>
+            <h2>Task 4: Creating & Removing Elements</h2>
+            <ul id="dynamicList" style="margin-bottom: 12px; padding-left: 20px;">
+                <li>List Item 1</li>
+            </ul>
+            <button class="btn-primary" id="addItemBtn">Add Item</button>
+            <button class="btn-secondary" id="removeItemBtn">Remove Item</button>
+        </div>
+    </div>
+
+    <script>
+        const textParagraph = document.getElementById('textParagraph');
+        const changeTextBtn = document.getElementById('changeTextBtn');
+
+        changeTextBtn.addEventListener('click', function() {
+            textParagraph.textContent = "The paragraph text has been changed via DOM";
+        });
+
+        const styledBox = document.getElementById('styledBox');
+        const changeBgBtn = document.getElementById('changeBgBtn');
+        const changeFontBtn = document.getElementById('changeFontBtn');
+
+        changeBgBtn.addEventListener('click', function() {
+            styledBox.style.backgroundColor = "#a0a09a";
+            styledBox.style.color = "#121210"
+        });
+
+        let currentSize = 15;
+        changeFontBtn.addEventListener('click', function() {
+            currentSize += 3;
+            styledBox.style.fontSize = currentSize + "px";
+        });
+
+        const dynamicList = document.getElementById('dynamicList');
+        const addItemBtn = document.getElementById('addItemBtn');
+        const removeItemBtn = document.getElementById('removeItemBtn');
+
+        addItemBtn.addEventListener('click', function() {
+            const newItem = document.createElement('li');
+            newItem.textContent = "List Item " + (dynamicList.children.length + 1);
+            dynamicList.appendChild(newItem);
+        });
+
+        removeItemBtn.addEventListener('click', function() {
+            const lastItem = dynamicList.lastElementChild;
+            if (lastItem) {
+                dynamicList.removeChild(lastItem);
+            }
+        });
+    </script>
+</body>
+</html>
