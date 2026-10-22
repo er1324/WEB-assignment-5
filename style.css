@@ -114,3 +114,42 @@ h1, h2, h3 {
     border-color: #f5f4f0;
     box-shadow: 0 0 0 0.25rem rgba(245, 244, 240, 0.15);
 }
+
+.todo-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.todo-list-section, .todo-form-section {
+    background: #121210;
+    padding: 20px;
+    border: 1px solid #333330;
+    border-radius: 6px;
+}
+
+.task-card {
+    background: #181816;
+    padding: 15px;
+    margin-bottom: 12px;
+    border: 1px solid #333330;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.task-info h4 {
+    margin-bottom: 4px;
+    color: #f5f4f0;
+}
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: #a0a09a !important;
+}
