@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Events & Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="navbar-nav">
+            <li><a href="index.html" class="nav-link">Intro</a></li>
+            <li><a href="dom.html" class="nav-link">DOM</a></li>
+            <li><a href="events.html" class="nav-link active">Events</a></li>
+            <li><a href="todo.html" class="nav-link">To-Do App</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-container">
+        <div style="margin-bottom: 30px;">
+            <h2>Task 5: Mouse Events</h2>
+            <div id="colorBox" style="width: 200px; height: 100px; background-color: #333330; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: background 0.2s;">
+                Hover Over Me
+            </div>
+        </div>
+
+        <div style="margin-bottom: 30px;">
+            <h2>Task 6: Keyboard Events</h2>
+            <input type="text" id="keyInput" class="form-control" placeholder="Type something here..." style="margin-bottom: 10px;">
+            <p>Current input value: <span id="outputSpan" style="font-weight: bold;"></span></p>
+        </div>
+
+        <div>
+            <h2>Task 7: Calculator</h2>
+            <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                <input type="number" id="num1" class="form-control" placeholder="First number">
+                <input type="number" id="num2" class="form-control" placeholder="Second number">
+            </div>
+            <div style="margin-bottom: 10px;">
+                <button class="btn-primary" onclick="calculate('+')">+</button>
+                <button class="btn-primary" onclick="calculate('-')">-</button>
+                <button class="btn-primary" onclick="calculate('*')">*</button>
+                <button class="btn-primary" onclick="calculate('/')">/</button>
+            </div>
+            <h3>Result: <span id="calcResult">0</span></h3>
+        </div>
+    </div>
+
+    <script>
+        const colorBox = document.getElementById('colorBox');
+
+        colorBox.addEventListener('mouseover', function() {
+            colorBox.style.backgroundColor = "#a0a09a";
+            colorBox.style.color = "#121210";
+            colorBox.textContent = "Mouse Inside";
+        });
+
+        colorBox.addEventListener('mouseout', function() {
+            colorBox.style.backgroundColor = "#333330";
+            colorBox.style.color = "#f5f4f0";
+            colorBox.textContent = "Hover Over Me";
+        });
+
+        const keyInput = document.getElementById('keyInput');
+        const outputSpan = document.getElementById('outputSpan');
+
+        keyInput.addEventListener('keyup', function(event) {
+            outputSpan.textContent = event.target.value;
+        });
+
+        function calculate(operator) {
+            let n1 = parseFloat(document.getElementById('num1').value);
+            let n2 = parseFloat(document.getElementById('num2').value);
+            let resultContainer = document.getElementById('calcResult');
+
+            if (isNaN(n1) || isNaN(n2)) {
+                resultContainer.textContent = "Enter valid numbers";
+                return;
+            }
+
+            let res = 0;
+            if (operator === '+') res = n1 + n2;
+            else if (operator === '-') res = n1 - n2;
+            else if (operator === '*') res = n1 * n2;
+            else if (operator === '/') {
+                if (n2 === 0) {
+                    resultContainer.textContent = "Division by zero";
+                    return;
+                }
+                res = n1 / n2;
+            }
+            resultContainer.textContent = res;
+        }
+    </script>
+</body>
+</html>
