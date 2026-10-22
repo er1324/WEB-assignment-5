@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="navbar-nav">
+            <li><a href="index.html" class="nav-link">Intro</a></li>
+            <li><a href="dom.html" class="nav-link">DOM</a></li>
+            <li><a href="events.html" class="nav-link">Events</a></li>
+            <li><a href="todo.html" class="nav-link active">To-Do App</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-container" style="max-width: 1200px;">
+        <div class="todo-layout">
+            <div class="todo-list-section">
+                <h2>To-do list</h2>
+                <div id="tasksContainer" style="margin-top: 15px;">
+                    <p style="color: #a0a09a;">No tasks added yet.</p>
+                </div>
+            </div>
+
+            <div class="todo-form-section">
+                <h2>Add new task</h2>
+                <form id="todoForm" style="margin-top: 15px;">
+                    <label style="display: block; margin-bottom: 6px;">* Title</label>
+                    <input type="text" id="taskTitle" class="form-control" style="margin-bottom: 15px;" required>
+
+                    <label style="display: block; margin-bottom: 6px;">* Description</label>
+                    <textarea id="taskDesc" class="form-control" rows="4" style="margin-bottom: 15px;" required></textarea>
+
+                    <button type="submit" class="btn-primary" style="width: 100%;">Add task</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let tasksArray = [];
+
+        const todoForm = document.getElementById('todoForm');
+        const taskTitleInput = document.getElementById('taskTitle');
+        const taskDescInput = document.getElementById('taskDesc');
+        const tasksContainer = document.getElementById('tasksContainer');
+
+        todoForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const title = taskTitleInput.value.trim();
+            const description = taskDescInput.value.trim();
+
+            if (!title || !description) return;
+
+            const newTask = {
+                id: Date.now(),
+                title: title,
+                description: description,
+                completed: false
+            };
+
+            tasksArray.push(newTask);
+            renderTasks();
+
+            taskTitleInput.value = '';
+            taskDescInput.value = '';
+        });
+
+        function renderTasks() {
+            if (tasksArray.length === 0) {
+                tasksContainer.innerHTML = `<p style="color: #a0a09a;">No tasks added yet.</p>`;
+                return;
+            }
+
+            tasksContainer.innerHTML = '';
+            tasksArray.forEach(task => {
+                const taskCard = document.createElement('div');
+                taskCard.className = "task-card";
+                
+                taskCard.innerHTML = `
+                    <div class="task-info">
+                        <h4 class="${task.completed ? 'completed' : ''}">${task.title}</h4>
+                        <p class="${task.completed ? 'completed' : ''}" style="font-size: 14px; color: #a0a09a;">${task.description}</p>
+                    </div>
+                    <div class="task-actions">
+                        <button class="btn-secondary" style="padding: 6px 12px !important; font-size: 11px !important;" onclick="toggleComplete(${task.id})">${task.completed ? 'Undo' : 'Done'}</button>
+                        <button class="btn-primary" style="padding: 6px 10px !important; font-size: 11px !important; background-color: #b0525d !important; color: #f5f4f0 !important;" onclick="deleteTask(${task.id})">X</button>
+                    </div>
+                `;
+                tasksContainer.appendChild(taskCard);
+            });
+        }
+
+        function deleteTask(id) {
+            tasksArray = tasksArray.filter(task => task.id !== id);
+            renderTasks();
+        }
+
+        function toggleComplete(id) {
+            tasksArray = tasksArray.map(task => {
+                if (task.id === id) {
+                    return { ...task, completed: !task.completed };
+                }
+                return task;
+            });
+            renderTasks();
+        }
+    </script>
+</body>
+</html>
